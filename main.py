@@ -12,6 +12,8 @@ def main():
     subparsers.add_parser("list")
     complete_parser = subparsers.add_parser("complete")
     complete_parser.add_argument("id", type=int)
+    delete_parser = subparsers.add_parser("delete")
+    delete_parser.add_argument("id", type=int)
     args = parser.parse_args()
     if args.command == "add":
         existing_task = storage.load()
@@ -34,6 +36,13 @@ def main():
                 i.completed = True
                 storage.save(load_existing_task)
         print(f"Task {args.id} completed")
+    elif args.command == "delete":
+        load_existing_task = storage.load()
+        for i in load_existing_task:
+            if i.id == args.id:
+                load_existing_task.remove(i)
+                storage.save(load_existing_task)
+        print(f"Task {args.id} deleted")
 
 if __name__ == "__main__":
     main()
