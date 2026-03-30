@@ -21,7 +21,10 @@ def main():
         storage.save(existing_task)
         print(f"Adding {args.title}")
     elif args.command == "list":
+        load_existing_task = storage.load()
         print("Listing tasks")
+        for i in load_existing_task:
+            print(f"{i.id}. [{"x" if i.completed else " "}] {i.title}")
 
 if __name__ == "__main__":
     main()
