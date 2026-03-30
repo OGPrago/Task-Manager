@@ -9,10 +9,10 @@ def load():
             for i in data_list:
                 converted_data_list.append(Task.from_dict(i))
             return converted_data_list
-    except FileNotFoundError:
+    except(FileNotFoundError, json.JSONDecodeError):
         return []
 
 def save(tasks):
     with open("task.json", 'w') as file:
         converted_list = [task.to_dict() for task in tasks]
-        json.dump(converted_list, file)
+        json.dump(converted_list, file, indent=2)
