@@ -42,6 +42,9 @@ def main():
             if i.id == args.id:
                 load_existing_task.remove(i)
                 storage.save(load_existing_task)
+        for index, item in enumerate(load_existing_task, start=1):
+            item.id = index
+        storage.save(load_existing_task)
         print(f"Task {args.id} deleted")
 
 if __name__ == "__main__":
