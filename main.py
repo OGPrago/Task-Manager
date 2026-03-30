@@ -10,6 +10,8 @@ def main():
     add_parser = subparsers.add_parser("add")
     add_parser.add_argument("title")
     subparsers.add_parser("list")
+    complete_parser = subparsers.add_parser("complete")
+    complete_parser.add_argument("id", type=int)
     args = parser.parse_args()
     if args.command == "add":
         existing_task = storage.load()
@@ -25,6 +27,13 @@ def main():
         print("Listing tasks")
         for i in load_existing_task:
             print(f"{i.id}. [{"x" if i.completed else " "}] {i.title}")
+    elif args.command == "complete":
+        load_existing_task = storage.load()
+        for i in load_existing_task:
+            if i.id == args.id:
+                i.completed = True
+                storage.save(load_existing_task)
+        print(f"Task {args.id} completed")
 
 if __name__ == "__main__":
     main()
