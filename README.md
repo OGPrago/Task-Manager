@@ -8,48 +8,57 @@ A simple command-line task manager built with Python. Add, list, complete, and d
 
 ## Installation
 
+### Option 1 — Install via pip (recommended)
+
 ```bash
-git clone https://github.com/OGPrago/Task-Manager.git
-cd task-manager
+pip install git+https://github.com/OGPrago/Task-Manager.git
 ```
 
-No dependencies to install — uses Python's standard library only.
+Then use `task-manager` from anywhere on your machine.
+
+### Option 2 — Run from source
+
+```bash
+git clone https://github.com/OGPrago/Task-Manager.git
+cd Task-Manager
+python main.py <command>
+```
 
 ## Usage
 
 ```bash
-python main.py add "Task title"     # Add a new task
-python main.py list                 # List all tasks
-python main.py complete <id>        # Mark a task as complete
-python main.py delete <id>          # Delete a task
+task-manager add "Task title"     # Add a new task
+task-manager list                 # List all tasks
+task-manager complete <id>        # Mark a task as complete
+task-manager delete <id>          # Delete a task
 ```
 
 ### Examples
 
 ```bash
-$ python main.py add "Go to gym"
+$ task-manager add "Go to gym"
 Adding Go to gym
 
-$ python main.py add "Buy groceries"
+$ task-manager add "Buy groceries"
 Adding Buy groceries
 
-$ python main.py list
+$ task-manager list
 Listing tasks
 1. [ ] Go to gym
 2. [ ] Buy groceries
 
-$ python main.py complete 1
+$ task-manager complete 1
 Task 1 completed
 
-$ python main.py list
+$ task-manager list
 Listing tasks
 1. [x] Go to gym
 2. [ ] Buy groceries
 
-$ python main.py delete 1
+$ task-manager delete 1
 Task 1 deleted
 
-$ python main.py list
+$ task-manager list
 Listing tasks
 1. [ ] Buy groceries
 ```
@@ -57,14 +66,15 @@ Listing tasks
 ## Project Structure
 
 ```
-task-manager/
-├── main.py        # Entry point and CLI routing
-├── task.py        # Task model
-├── storage.py     # JSON persistence layer
-└── tasks.json     # Local task data (auto-created)
+Task-Manager/
+├── main.py          # Entry point and CLI routing
+├── task.py          # Task model
+├── storage.py       # JSON persistence layer
+├── pyproject.toml   # Package configuration
+└── tasks.json       # Local task data (auto-created)
 ```
 
 ## Notes
 
-- Tasks are saved to `tasks.json` in the project directory.
+- Tasks are saved to `tasks.json` in the directory where you run the command.
 - Task IDs are automatically resequenced after deletion.
